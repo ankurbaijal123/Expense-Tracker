@@ -2,5 +2,4 @@
 Ankur Baijal
 
 
-Setup:
-- run ```npm i && npm start```
+
