@@ -1,4 +1,4 @@
-# Speechly Expense Tracker
+# Expense Tracker
 Ankur Baijal
 
 
