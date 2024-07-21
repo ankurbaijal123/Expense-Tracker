@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure full viewport height */
+            box-sizing: border-box;
+        }
+    
+        .container {
+            max-width: 700px;
+            width: 100%;
+            margin: 20px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+    
+        h1 {
+            text-align: center;
+            color: #0056b3;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+    
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .input-group {
+            margin-bottom: 20px;
+        }
+    
+        label {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+    
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1rem;
+            color: #333;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+    
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+    
+        button {
+            padding: 14px 20px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+    
+        button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+    
+        button:active {
+            transform: translateY(0);
+        }
+    
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+    
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+    
+        th, td {
+            padding: 14px;
+            text-align: left;
+            font-size: 1rem;
+        }
+    
+        th {
+            background-color: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+        }
+    
+        td {
+            background-color: #ffffff;
+            color: #666;
+        }
+    
+        td button {
+            padding: 8px 14px;
+            background-color: #dc3545;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+    
+        td button:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+        }
+    
+        td button:active {
+            transform: translateY(0);
+        }
+    
+        h2 {
+            text-align: center;
+            color: #007bff;
+            font-size: 1.75rem;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+    
+        canvas {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    
+        .download-btn {
+            padding: 14px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 0 10px;
+        }
+    
+        .download-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+    
+        .download-btn:active {
+            transform: translateY(0);
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+    
+            h1 {
+                font-size: 2rem;
+            }
+    
+            button {
+                padding: 12px;
+                font-size: 1rem;
+            }
+    
+            table, th, td {
+                font-size: 0.875rem;
+            }
+    
+            .download-btn {
+                padding: 12px;
+                font-size: 1rem;
+            }
+        }
+    
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+    
+            h1 {
+                font-size: 1.75rem;
+            }
+    
+            button {
+                padding: 10px;
+                font-size: 0.875rem;
+            }
+    
+            table, th, td {
+                font-size: 0.75rem;
+            }
+    
+            .download-btn {
+                padding: 10px;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Expense Tracker</h1>
+        <form id="expense-form">
+            <div class="input-group">
+                <label for="description">Description:</label>
+                <input type="text" id="description" required>
+            </div>
+            <div class="input-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" required>
+            </div>
+            <div class="input-group">
+                <label for="category">Category:</label>
+                <input type="text" id="category" required>
+            </div>
+            <div class="input-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
+            </div>
+            <button type="submit">Add Expense</button>
+        </form>
+        <table id="expense-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <h2>Total: <span id="total-amount">0</span></h2>
+        <canvas id="expense-chart" width="400" height="200"></canvas>
+        <div class="button-container">
+            <button class="download-btn" id="download-csv">Download CSV</button>
+            <button class="download-btn" id="download-pdf">Download PDF</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</body>
+</html>
